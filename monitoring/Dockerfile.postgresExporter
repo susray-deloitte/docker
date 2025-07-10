@@ -1,0 +1,9 @@
+FROM quay.io/prometheuscommunity/postgres-exporter:latest
+
+# Expose the default metrics port
+EXPOSE 9187
+
+# Optionally set environment variables for the Postgres connection
+# ENV DATA_SOURCE_NAME=postgresql://postgres:postgres@host.docker.internal:5432/postgres?sslmode=disable
+
+# The default entry

@@ -1,0 +1,13 @@
+FROM grafana/grafana:latest
+
+# Expose Grafana's default port
+EXPOSE 3000
+
+# Optional: Copy custom provisioning or plugins if needed
+# COPY ./provisioning /etc/grafana/provisioning
+# COPY ./plugins /var/lib/grafana/plugins
+
+# Optional: Set environment variables (e.g., admin password)
+# ENV GF_SECURITY_ADMIN_PASSWORD=yourpassword
+
+# Start Grafana (default CMD is already set in the base image)

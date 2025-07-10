@@ -1,0 +1,6 @@
+FROM gcr.io/google-containers/cadvisor:latest
+
+# Expose cAdvisor web UI and metrics port
+EXPOSE 8080
+
+# The default

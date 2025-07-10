@@ -1,0 +1,22 @@
+docker run -d -p 5432:5432 --name postgres-db --network monitoring -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgres postgres:v1
+docker run -d -p 9187:9187 --name postgres-exporter --network monitoring -e DATA_SOURCE_NAME="postgresql://postgres:postgres@postgres-db-cpu:5432/postgres?sslmode=disable" postgresexporter:v1
+
+docker run -d -p 5432:5432 \
+  --name postgres-db \
+  --network monitoring \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=postgres \
+  -e POSTGRES_DB=postgres \
+  -m 1g \
+  --cpus="1.0" \
+  postgres:v1 \
+  -c max_connections=5000
+
+docker run -d --name cadvisor --network monitoring -p 8080:8080 \
+  -v /:/rootfs:ro \
+  -v /var/run:/var/run:ro \
+  -v /sys:/sys:ro \
+  -v /var/lib/docker/:/var/lib/docker:ro \
+  -v /etc/machine-id:/etc/machine-id:ro \
+  -v /dev/kmsg:/dev/kmsg \
+  cadvisor:v1
